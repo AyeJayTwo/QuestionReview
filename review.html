@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="reviewModule">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
+
+  <title>Reviewer</title>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+</head>
+
+<body>
+  <script type="text/javascript">
+    var d = {question:"Hi", answer1:"a1", answer2:"a2", answer3:"a3", answer4:"a4",answer5:"a5"};
+    var b = {question:"Bye", answer1:"b1", answer2:"b2", answer3:"b3", answer4:"b4",answer5:"b5"};
+    var c = {question:"Hola", answer1:"c1", answer2:"c2", answer3:"c3", answer4:"c4",answer5:"c5"};
+    var questions = [b,c,d];
+  </script>
+
+  <div class="container">
+    <div class="header">
+      <nav>
+        <ul class="nav nav-pills pull-right">
+          <li role="presentation" ><a href="form.html">Submit</a></li>
+          <li role="presentation" class="active"><a href="review.html">Review</a></li>
+          <li role="presentation"><a href="#">Feedback</a></li>
+        </ul>
+      </nav>
+      <h3 class="text-muted">Questioning</h3>
+    </div>
+
+    <div class="jumbotron">
+      <h1>Reviewer</h1>
+      <p class="lead">Review your questions, collaborate with classmates, and destroy your next exam.</p>
+    </div>
+
+    <div class="jumbotron" ng-controller="ReviewController as r">
+      <div class="btn-group btn-group-sm btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+        <a ng-click="r.lastQuestion()"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span>   Previous</button></a>
+        </div>
+        <div class="btn-group" role="group">
+          <a ng-click="r.randomQuestion()"><button type="button" class="btn btn-default" >Random   <span class="glyphicon glyphicon glyphicon-retweet" aria-hidden="true"></span></button></a>
+        </div>
+        <div class="btn-group" role="group">
+          <a ng-click="r.nextQuestion()"><button type="button" class="btn btn-default" >Next <span class="glyphicon glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></button></a>
+        </div>
+      </div>
+
+      <div class="list-group">
+        <ul class="list-group-item list-group-item-success">{{r.question[r.currentQuestion].question}}</ul>
+        <a href="#!" class="list-group-item list-group-item-info" 
+          ng-click="r.testQuestion(1)">
+        1) {{r.question[r.currentQuestion].answer1}}</a>
+        <a href="#!" class="list-group-item list-group-item-info" 
+        ng-click="r.testQuestion(2)">
+        2) {{r.question[r.currentQuestion].answer2}}</a>
+        <a href="#!" class="list-group-item list-group-item-info" 
+        ng-click="r.testQuestion(3)">
+        3) {{r.question[r.currentQuestion].answer3}}</a>
+        <a href="#!" class="list-group-item list-group-item-info" 
+        ng-click="r.testQuestion(4)">
+        4) {{r.question[r.currentQuestion].answer4}}</a>
+        <a href="#!" class="list-group-item list-group-item-info" 
+        ng-click="r.testQuestion(5)">
+        5) {{r.question[r.currentQuestion].answer5}}</a>
+        <ul class="list-group-item list-group-item-failure">{{"Correct Answer is: "+r.question[r.currentQuestion].correctAns}}</ul>
+      </div>
+    </div>
+
+
+
+
+  <br>
+  <footer class="footer" align="right">
+    <a href="https://twitter.com/AyeJayTwo" class="twitter-follow-button" data-show-count="false">Follow @AyeJayTwo</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </footer>
+
+
+</div><!--End Container -->
+
+
+
+
+
+<script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.2.7.min.js"></script>
+<script type="text/javascript" src="angular.js"></script>
+<script type="text/javascript" src="review_angular.js"></script>
+<script type="text/javascript" src="jquery-2.1.1.js"></script>
+<script type="text/javascript" src="bootstrap.js"></script>
+</body>
+</html>
