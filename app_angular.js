@@ -30,3 +30,8 @@ error: function(questionClass, error) {
 
 		document.getElementById("questions").reset();
 	}
+
+function scrollBottom(){
+    window.scrollTo(0,document.body.scrollHeight);
+};
+

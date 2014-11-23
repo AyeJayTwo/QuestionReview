@@ -27,7 +27,7 @@
         <ul class="nav nav-pills pull-right">
           <li role="presentation" ><a href="form.html">Submit</a></li>
           <li role="presentation" class="active"><a href="review.html">Review</a></li>
-          <li role="presentation"><a href="#">Feedback</a></li>
+          <li role="presentation" data-toggle="modal" data-target="#myModal"><a href="#">Feedback</a></li>
         </ul>
       </nav>
       <h3 class="text-muted">Questioning</h3>
@@ -81,10 +81,28 @@
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   </footer>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Feedback!</h4>
+      </div>
+      <div class="modal-body">
+        I would really appreciate any feedback on this alpha website. Shoot me an email and I'll do my best to incorporate it into the website!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a class = "btn btn-primary" href="mailto:jainankit68@gmail.com" roll="button">Send Email</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 </div><!--End Container -->
-
-
 
 
 
