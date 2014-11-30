@@ -8,12 +8,13 @@ function questionButton(ans) {
         	var QuestionClass = Parse.Object.extend("QuestionClass");
         	var questionClass = new QuestionClass();
         	questionClass.set("question",document.questions.question.value);
-        	questionClass.set("answer1",document.questions.answer1.value);
-        	questionClass.set("answer2",document.questions.answer2.value);
-        	questionClass.set("answer3",document.questions.answer3.value);
-        	questionClass.set("answer4",document.questions.answer4.value);
-        	questionClass.set("answer5",document.questions.answer5.value);
-        	questionClass.set("correctAns",ans);
+        	questionClass.set("answers",[
+                document.questions.answer1.value,
+                document.questions.answer2.value,
+                document.questions.answer3.value,
+                document.questions.answer4.value,
+                document.questions.answer5.value]);
+        	questionClass.set("correctAns",ans); //correctAns is an index value of the answers
 
 		// Save the Question to the CLoud
 		questionClass.save(null, {	success: function(questionClass) {

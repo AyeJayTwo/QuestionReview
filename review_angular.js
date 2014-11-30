@@ -1,77 +1,147 @@
-	var app = angular.module('reviewModule',[]);
+var app = angular.module('reviewModule',[]);
 
-	app.controller('ReviewController',function(){
-		this.question = data;
+test_data = [];
+data = [];
+
+// var questionParser=function(datum){
+// 	for(i=0; i < datum.length; i++){
+// 		data = [];
+// 		data.push(
+// 		{
+// 			question: datum[i].attributes.question,
+// 			answers: datum[i].attributes.answers,
+// 			correctAns: datum[i].attributes.correctAns
+// 		}
+// 		)
+// 	}
+// 	alert('Finished Parsing Data ' + data.length);
+// }
+
+
+// var getQuestions = function(questionParser){
+// 	Parse.initialize("u5jBWTYJkgmfrJMvIsMloaJkeBTRReHuWH7x1ynJ", "D5rcBMkBVj1ecPOTq0SVC3oiohxu7lvApmt1rmna");
+// 	var QuestionClass = Parse.Object.extend("QuestionClass");
+// 	var questions = new Parse.Query(QuestionClass);
+// 	questions.find({
+// 		success: function(results){
+// 			alert("Successfully retrieved " + results.length + " questions.");
+// 				//console.log(results);
+// 				test_data = results;
+// 				console.log(test_data);
+// 				this.questionParser(test_data);
+// 			},
+// 			error: function(error) {
+// 				alert("You fucked up");
+// 			}
+// 		});
+// 		//console.log($scope.test_data);
+// 		questionParser(test_data);
+// 	}
+
+
+	app.controller('ReviewController',['$scope', function($scope){
+
+		this.questionsLoaded = false;
+
+		$scope.test_data = [];
+		var review = this;
+
+		if(data){this.question = data;}
 		this.currentQuestion = 1;
 
-		this.testQuestion = function(guess){
-			alert(guess === data[this.currentQuestion].correctAns);
-		};
-
-		this.nextQuestion = function(){
-			if((this.currentQuestion + 1) === this.question.length){
-				this.currentQuestion = 0;
-			} else {
-				this.currentQuestion++;
+		this.questionParser=function(datum){
+			for(i=0; i < datum.length; i++){
+				data.push(
+				{
+					question: datum[i].attributes.question,
+					answers: datum[i].attributes.answers,
+					correctAns: datum[i].attributes.correctAns
+				}
+				)
 			}
-		};
+			alert('Finished Parsing Data ' + data.length);
+			review.questionsLoaded = true;
+			alert(review.questionsLoaded);
+		}
 
-		this.lastQuestion = function(){
-			if(this.currentQuestion - 1 < 0){
-				this.currentQuestion = data.length-1;
-			}else{
-				this.currentQuestion--;
+
+		this.getQuestions = function(questionParser){
+			Parse.initialize("u5jBWTYJkgmfrJMvIsMloaJkeBTRReHuWH7x1ynJ", "D5rcBMkBVj1ecPOTq0SVC3oiohxu7lvApmt1rmna");
+			var QuestionClass = Parse.Object.extend("QuestionClass");
+			var questions = new Parse.Query(QuestionClass);
+			questions.find({
+				success: function(results){
+					alert("Successfully retrieved " + results.length + " questions.");
+				//console.log(results);
+				$scope.test_data = results;
+				console.log($scope.test_data);
+				review.questionParser($scope.test_data);
+			},
+			error: function(error) {
+				alert("You fucked up");
 			}
-		};
+		});
+		//console.log($scope.test_data);
+		//this.questionParser($scope.test_data)
+	}
 
-		this.randomQuestion = function(){
-			randomQuestionID = RandomQuestionGenerator();
-			if(this.currentQuestion === randomQuestionID){
-				this.randomQuestion();
-			}else{
-				this.currentQuestion = randomQuestionID;
-			}
-			
-		};
+	this.getQuestions();
 
-
-	});
-
-
-	var RandomQuestionGenerator = function(){
-		return Math.floor(Math.random()*data.length);
+	this.testQuestion = function(guess){
+		alert(guess === (data[this.currentQuestion].correctAns));
+		console.log(guess);
 	};
 
-	var data = [
-		{
-			id: 1,
-		 	question: "Q1: What is Happening",
-		 	answer1: "What",
-		 	answer2: "Who",
-		 	answer3: "Where",
-		 	answer4: "Why",
-		 	answer5: "How",
-		 	correctAns: 3
-		 },
-		 {
-			id: 2,
-		 	question: "Q2: Why is Happening?",
-		 	answer1: "I dunno",
-		 	answer2: "Yes you do",
-		 	answer3: "Seriously, I don't",
-		 	answer4: "Why",
-		 	answer5: "I dunno",
-		 	correctAns: 2
-		 },
-		 {
-			id: 3,
-		 	question: "Q3: Where is Happening?",
-		 	answer1: "I know",
-		 	answer2: "NO you don't",
-		 	answer3: "Seriously, I do",
-		 	answer4: "Why",
-		 	answer5: "I dunno",
-		 	correctAns: 1
-		 }
-		 ];
+	this.nextQuestion = function(){
+		if((this.currentQuestion + 1) === this.question.length){
+			this.currentQuestion = 0;
+		} else {
+			this.currentQuestion++;
+		}
+		// this.getQuestions();
+	};
 
+	this.lastQuestion = function(){
+		if(this.currentQuestion - 1 < 0){
+			this.currentQuestion = data.length-1;
+		}else{
+			this.currentQuestion--;
+		}
+		// this.questionParser($scope.test_data);
+	};
+
+	this.randomQuestion = function(){
+		randomQuestionID = RandomQuestionGenerator();
+		if(this.currentQuestion === randomQuestionID){
+			this.randomQuestion();
+		}else{
+			this.currentQuestion = randomQuestionID;
+		}
+	};
+
+	var RandomQuestionGenerator = function(){
+	return Math.floor(Math.random()*data.length);
+};
+
+
+}]); //End ReviewController
+
+
+
+// data = [
+// {
+// 	question: "Q1: What is Happening",
+// 	answers: ["What","Who","Where","Why","How"],
+// 	correctAns: 2
+// },
+// {
+// 	question: "Q2: Why is Happening?",
+// 	answers: ["I dunno","Yes you do","Seriously, I don't","Why","meh"],
+// 	correctAns: 1
+// },
+// {
+// 	question: "Q3: Where is Happening?",
+// 	answers: ["I know", "NO you don't", "Seriously, I do","Why","I dunno"],
+// 	correctAns: 0
+// }
+// ];

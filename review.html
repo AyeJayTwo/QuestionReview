@@ -14,13 +14,6 @@
 </head>
 
 <body>
-  <script type="text/javascript">
-    var d = {question:"Hi", answer1:"a1", answer2:"a2", answer3:"a3", answer4:"a4",answer5:"a5"};
-    var b = {question:"Bye", answer1:"b1", answer2:"b2", answer3:"b3", answer4:"b4",answer5:"b5"};
-    var c = {question:"Hola", answer1:"c1", answer2:"c2", answer3:"c3", answer4:"c4",answer5:"c5"};
-    var questions = [b,c,d];
-  </script>
-
   <div class="container">
     <div class="header">
       <nav>
@@ -51,28 +44,12 @@
         </div>
       </div>
 
-      <div class="list-group">
+      <div class="list-group" ng-model="r.questionsLoaded">
         <ul class="list-group-item list-group-item-success">{{r.question[r.currentQuestion].question}}</ul>
-        <a href="#!" class="list-group-item list-group-item-info" 
-          ng-click="r.testQuestion(1)">
-        1) {{r.question[r.currentQuestion].answer1}}</a>
-        <a href="#!" class="list-group-item list-group-item-info" 
-        ng-click="r.testQuestion(2)">
-        2) {{r.question[r.currentQuestion].answer2}}</a>
-        <a href="#!" class="list-group-item list-group-item-info" 
-        ng-click="r.testQuestion(3)">
-        3) {{r.question[r.currentQuestion].answer3}}</a>
-        <a href="#!" class="list-group-item list-group-item-info" 
-        ng-click="r.testQuestion(4)">
-        4) {{r.question[r.currentQuestion].answer4}}</a>
-        <a href="#!" class="list-group-item list-group-item-info" 
-        ng-click="r.testQuestion(5)">
-        5) {{r.question[r.currentQuestion].answer5}}</a>
-        <ul class="list-group-item list-group-item-failure">{{"Correct Answer is: "+r.question[r.currentQuestion].correctAns}}</ul>
+        <a href="#!" class="list-group-item list-group-item-info" ng-repeat="answer in r.question[r.currentQuestion].answers" ng-click="r.testQuestion($index)">{{answer}}</a>
+        <ul class="list-group-item list-group-item-failure">{{"Correct Answer is: "+r.question[r.currentQuestion].answers[r.question[r.currentQuestion].correctAns]}}</ul>
       </div>
     </div>
-
-
 
 
   <br>
